@@ -47,6 +47,7 @@ def entrypoint(event_dict, pr_branch, gh_token, last_git_commit_message):
     new_branch = release(base_branch, pr_branch, pr_number)
 
     # Truncate for PR title
+    last_git_commit_message = last_git_commit_message.strip()
     pr_title = (last_git_commit_message[:75] + '..') if len(last_git_commit_message) > 75 else last_git_commit_message
 
     new_pr_number = github_open_pull_request(
