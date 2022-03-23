@@ -95,7 +95,10 @@ def github_open_issue(title: str, body: str, gh_token: str):
         "title": title,
         "body": body,
     }
-
+    print(title)
+    print(body)
+    print(gh_token)
+    print(headers)
     response = requests.post(url=f"{_github_repo_url()}/issues", json=body, headers=headers)
     response.raise_for_status()
     
