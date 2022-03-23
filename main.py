@@ -83,6 +83,9 @@ if __name__ == "__main__":
         main_traceback = traceback.format_exc()
         traceback_formatted_for_body = f"\n```python\n{main_traceback}```"
         try:
+            print(args.pr_branch)
+            print(args.github_token)
+            print(args.last_git_commit_message)
             pr_num = _get_pr_number(event_dict=github_event)
             title = f"Could not automatically release #{pr_num}"
             body = f"Exception occurred when trying to cherry-pick PR #{pr_num}.\nPlease cherry-pick it manually."
