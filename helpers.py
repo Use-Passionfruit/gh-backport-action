@@ -19,13 +19,9 @@ def git(*args):
         print(f"[git] new_branch: {args[2]}")
         print(f"[git] origin/inital_name: {args[3]}")
     try:
-        if args[0] == "switch":
-            print("it's switch!")
+        if args[0] == "push":
+            print("it's push!")
 
-        command_run = subprocess.run(["git", "branch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-        print("=============")
-        print(command_run.stdout)
-        print("=============")
         command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
         if command_run.stdout is not None:
             return command_run.stdout.decode()
@@ -99,10 +95,15 @@ def github_open_pull_request(title: str, body: str, head: str, base: str, gh_tok
         "title": title,
         "body": body,
     }
-
-    response = requests.post(url=f"{_github_repo_url()}/pulls", json=body, headers=headers)
-    response.raise_for_status()
-    return response.json()["number"]
+    print(f"headers: {headers}")
+    try:
+        response = requests.post(url=f"{_github_repo_url()}/pulls", json=body, headers=headers)
+        response.raise_for_status()
+        return response.json()["number"]
+    except Exception as e:
+        print(f"ERROR! {e}")
+        pass
+    raise GitException(e)
 
 
 def github_open_issue(title: str, body: str, gh_token: str):
