@@ -27,7 +27,8 @@ def release(initial_name: str, to_branch: str, pr_number: str):
     """
     new_branch = f"release-{initial_name[:15]}-{pr_number}-{to_branch}"
     print(f"[release] new_branch: {new_branch}")
-    git("switch", "-c", new_branch, "origin/" + initial_name)
+    #git("switch", "-c", new_branch, "origin/" + initial_name)
+    git("switch", "-c", new_branch, "origin/master")
     print(f"Switched to future branch: {new_branch}.")
 #     try:
 #         for commit_hash in commits:

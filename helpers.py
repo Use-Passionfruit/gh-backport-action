@@ -21,9 +21,8 @@ def git(*args):
     try:
         if args[0] == "switch":
             print("it's switch!")
-            command_run = subprocess.run("git switch -c release-master-169-staging origin/master", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True) # IT FAILS HERE!!!
-        else:
-            command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True) # IT FAILS HERE!!!
+
+        command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
         if command_run.stdout is not None:
             return command_run.stdout.decode()
     except CalledProcessError as e:
