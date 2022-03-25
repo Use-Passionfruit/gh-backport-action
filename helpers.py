@@ -21,13 +21,14 @@ def git(*args):
     try:
         if args[0] == "switch":
             print("it's switch!")
-        command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True) # IT FAILS HERE!!!
         if command_run.stdout is not None:
             return command_run.stdout.decode()
     except CalledProcessError as e:
         output = e.stderr
         try:
             print("it's switch and it got messy! try")
+            print(f"output: {output}")
             output = output.decode()
         except:
             print("it's switch and it got messy! except")
