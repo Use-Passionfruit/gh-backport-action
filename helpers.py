@@ -28,6 +28,7 @@ def git(*args):
         output = e.stderr
         try:
             print("it's switch and it got messy! try")
+            print(f"e: {e}")
             print(f"output: {output}")
             output = output.decode()
         except:
