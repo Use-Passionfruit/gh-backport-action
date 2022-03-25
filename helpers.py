@@ -22,6 +22,10 @@ def git(*args):
         if args[0] == "switch":
             print("it's switch!")
 
+        command_run = subprocess.run(["git", "branch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        print("=============")
+        print(command_run.stdout)
+        print("=============")
         command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
         if command_run.stdout is not None:
             return command_run.stdout.decode()
