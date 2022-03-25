@@ -19,10 +19,14 @@ from helpers import (
 
 
 def release(initial_name: str, to_branch: str, pr_number: str):
+    print(f"[release] initial_name: {initial_name}")
+    print(f"[release] to_branch: {to_branch}")
+    print(f"[release] pr_number: {pr_number}")
     """
     Backport a list of commit on a *new* branch starting from to_branch.
     """
     new_branch = f"release-{initial_name[:15]}-{pr_number}-{to_branch}"
+    print(f"[release] new_branch: {new_branch}")
     git("switch", "-c", new_branch, "origin/" + initial_name)
     print(f"Switched to future branch: {new_branch}.")
 #     try:
@@ -39,22 +43,22 @@ def release(initial_name: str, to_branch: str, pr_number: str):
 def entrypoint(event_dict, pr_branch, gh_token, last_git_commit_message):
     print(f"[entrypoint] pr_branch: {pr_branch}")
     print(f"[entrypoint] gh_token: {gh_token}")
-    print(f"[entrypoint] last_git_commit_message: {last_git_commit_message}")
+    print(f"[entrypoint] last_git_commit_message 1!!!: {last_git_commit_message}")
     base_branch = _get_base_branch(event_dict)
     pr_number = _get_pr_number(event_dict)
 
     print(f"[entrypoint] base_branch: {base_branch}")
-    print(f"[entrypoint] pr_number: {pr_number}")
+    print(f"[entrypoint] pr_number: {pr_number}") # it gets into this point
 #     commits_to_backport = github_get_commits_in_pr(pr_number=pr_number, gh_token=gh_token)
 
 #     print(f"found {len(commits_to_backport)} commits to release.")
 
-    new_branch = release(base_branch, pr_branch, pr_number)
+    new_branch = release(base_branch, pr_branch, pr_number) # it fails here!
     print(f"[entrypoint] new_branch: {new_branch}")
 
     # Truncate for PR title
     last_git_commit_message = last_git_commit_message.strip()
-    print(f"[entrypoint] last_git_commit_message: {last_git_commit_message}")
+    print(f"[entrypoint] last_git_commit_message 2!!!: {last_git_commit_message}")
     pr_title = (last_git_commit_message[:75] + '..') if len(last_git_commit_message) > 75 else last_git_commit_message
     print(f"[entrypoint] pr_title: {pr_title}")
 
