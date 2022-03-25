@@ -37,18 +37,26 @@ def release(initial_name: str, to_branch: str, pr_number: str):
 
 
 def entrypoint(event_dict, pr_branch, gh_token, last_git_commit_message):
+    print(f"[entrypoint] pr_branch: {pr_branch}")
+    print(f"[entrypoint] gh_token: {gh_token}")
+    print(f"[entrypoint] last_git_commit_message: {last_git_commit_message}")
     base_branch = _get_base_branch(event_dict)
     pr_number = _get_pr_number(event_dict)
 
+    print(f"[entrypoint] base_branch: {base_branch}")
+    print(f"[entrypoint] pr_number: {pr_number}")
 #     commits_to_backport = github_get_commits_in_pr(pr_number=pr_number, gh_token=gh_token)
 
 #     print(f"found {len(commits_to_backport)} commits to release.")
 
     new_branch = release(base_branch, pr_branch, pr_number)
+    print(f"[entrypoint] new_branch: {new_branch}")
 
     # Truncate for PR title
     last_git_commit_message = last_git_commit_message.strip()
+    print(f"[entrypoint] last_git_commit_message: {last_git_commit_message}")
     pr_title = (last_git_commit_message[:75] + '..') if len(last_git_commit_message) > 75 else last_git_commit_message
+    print(f"[entrypoint] pr_title: {pr_title}")
 
     new_pr_number = github_open_pull_request(
         title=pr_title,
@@ -73,10 +81,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     git_setup(args.github_token)
     try:
-        print(f"event_dict: {github_event}")
+        #print(f"event_dict: {github_event}")
         print(f"pr_branch: {args.pr_branch}")
         print(f"gh_token: {args.github_token}")
-        print(f"event_dict: {args.last_git_commit_message}")
+        print(f"last_git_commit_message: {args.last_git_commit_message}")
         entrypoint(
             event_dict=github_event,
             pr_branch=args.pr_branch,
