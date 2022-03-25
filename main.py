@@ -73,16 +73,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
     git_setup(args.github_token)
     try:
+        print(f"event_dict: {github_event}")
+        print(f"pr_branch: {args.pr_branch}")
+        print(f"gh_token: {args.github_token}")
+        print(f"event_dict: {args.last_git_commit_message}")
         entrypoint(
             event_dict=github_event,
             pr_branch=args.pr_branch,
             gh_token=args.github_token,
             last_git_commit_message=args.last_git_commit_message
         )
-        print(f"event_dict: {github_event}")
-        print(f"pr_branch: {args.pr_branch}")
-        print(f"gh_token: {args.github_token}")
-        print(f"event_dict: {args.last_git_commit_message}")
     except Exception as main_exception:
         main_traceback = traceback.format_exc()
         traceback_formatted_for_body = f"\n```python\n{main_traceback}```"
