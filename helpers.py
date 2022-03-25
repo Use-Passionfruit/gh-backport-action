@@ -13,11 +13,14 @@ class GitException(Exception):
 
 
 def git(*args):
-    print(f"[git] switch: {args[0]}")
-    print(f"[git] -c: {args[1]}")
-    print(f"[git] new_branch: {args[2]}")
-    print(f"[git] origin/inital_name: {args[3]}")
+    if args[0] == "switch":
+        print(f"[git] switch: {args[0]}")
+        print(f"[git] -c: {args[1]}")
+        print(f"[git] new_branch: {args[2]}")
+        print(f"[git] origin/inital_name: {args[3]}")
     try:
+        if args[0] == "switch":
+            print("it's switch!")
         command_run = subprocess.run(["git", *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
         if command_run.stdout is not None:
             return command_run.stdout.decode()
