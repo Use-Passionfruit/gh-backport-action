@@ -27,8 +27,10 @@ def git(*args):
     except CalledProcessError as e:
         output = e.stderr
         try:
+            print("it's switch and it got messy! try")
             output = output.decode()
         except:
+            print("it's switch and it got messy! except")
             pass
         raise GitException(output)
 
