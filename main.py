@@ -70,6 +70,8 @@ def entrypoint(event_dict, pr_branch, gh_token, last_git_commit_message):
         body=f"An automated release for #{pr_number}.",
         gh_token=gh_token,
     )
+    print(f"[entrypoint] new_pr_number:")
+    print(new_pr_number)
     github_add_label_to_pr(new_pr_number, pr_branch, gh_token)
 
 

@@ -120,12 +120,17 @@ def github_open_issue(title: str, body: str, gh_token: str):
     response.raise_for_status()
     
 def github_add_label_to_pr(pr_number: int, label: str, gh_token: str):
+    print("[github_add_label_to_pr] headers: ")
+    print(headers)
     headers = github_api_headers(gh_token=gh_token)
     body = {
         "labels": [label]
     }
-    
+    print("[github_add_label_to_pr] body: ")
+    print(body)
     response = requests.patch(url=f"{_github_repo_url()}/issues/{pr_number}", json=body, headers=headers)
+    print("[github_add_label_to_pr] response: ")
+    print(response)
     response.raise_for_status()
 
 def github_get_commits_in_pr(pr_number: int, gh_token: str) -> typing.Any:
