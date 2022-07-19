@@ -50,6 +50,12 @@ def entrypoint(event_dict, pr_branch, gh_token, last_git_commit_message):
     last_git_commit_message = last_git_commit_message.strip()
     pr_title = (last_git_commit_message[:75] + '..') if len(last_git_commit_message) > 75 else last_git_commit_message
 
+    print(pr_title)
+    print(new_branch)
+    print(pr_branch)
+    print(f"An automated release for #{pr_number}.")
+    print(gh_token)
+
     new_pr_number = github_open_pull_request(
         title=pr_title,
         head=new_branch,
