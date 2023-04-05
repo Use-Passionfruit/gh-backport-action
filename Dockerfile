@@ -1,5 +1,6 @@
 # Container image that runs your code
-FROM python:3.17-alpine
+FROM python:3.12-alpine
+RUN ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 # installs git on container
 RUN apk update
 RUN apk add git
