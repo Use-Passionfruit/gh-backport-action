@@ -5,6 +5,8 @@ RUN echo "https://uk.alpinelinux.org/alpine/v3.17/main" > /etc/apk/repositories
 RUN echo "https://uk.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repositories
 RUN cat /etc/apk/repositories
 
+RUN wget https://uk.alpinelinux.org/alpine/v3.17/main
+
 # installs git on container
 RUN apk update
 RUN apk add git
