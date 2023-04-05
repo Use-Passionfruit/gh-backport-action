@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:3.12-alpine
+FROM python:3.11-alpine
 
 RUN echo "https://uk.alpinelinux.org/alpine/v3.17/main" > /etc/apk/repositories
 RUN echo "https://uk.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repositories
