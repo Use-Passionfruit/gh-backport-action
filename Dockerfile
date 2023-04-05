@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:3.11-alpine
+FROM python:3.17-alpine
 # installs git on container
 RUN apk update
 RUN apk add git
