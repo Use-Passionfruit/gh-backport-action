@@ -5,8 +5,6 @@ RUN echo "https://uk.alpinelinux.org/alpine/v3.17/main" > /etc/apk/repositories
 RUN echo "https://uk.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repositories
 RUN cat /etc/apk/repositories
 
-RUN ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
 # installs git on container
 RUN apk update
 RUN apk add git
